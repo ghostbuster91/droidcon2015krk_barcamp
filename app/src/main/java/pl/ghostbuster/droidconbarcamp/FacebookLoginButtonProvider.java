@@ -2,21 +2,12 @@ package pl.ghostbuster.droidconbarcamp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
-public class FacebookLoginButtonProvider {
-
-    public void initSdk(Context context) {
-        FacebookSdk.sdkInitialize(context);
-    }
+public interface FacebookLoginButtonProvider {
 
     interface SuccessCallback {
         void onSuccess();
@@ -26,37 +17,11 @@ public class FacebookLoginButtonProvider {
         void onError();
     }
 
-    private CallbackManager callbackManager;
+    void initSdk(Context context);
 
-    void addToContainer(ViewGroup container, SuccessCallback successCallback, ErrorCallback errorCallback) {
-        callbackManager = CallbackManager.Factory.create();
-        LayoutInflater inflater = LayoutInflater.from(container.getContext());
-        LoginButton button = (LoginButton) inflater.inflate(R.layout.facebook_login_button, container, false);
-        container.addView(button);
-        button.registerCallback(callbackManager, createFacebookCallback(successCallback, errorCallback));
-    }
+    FacebookCallback<LoginResult> createFacebookCallback(final SuccessCallback successCallback, final ErrorCallback errorCallback);
 
-    private FacebookCallback<LoginResult> createFacebookCallback(final SuccessCallback successCallback, final ErrorCallback errorCallback) {
-        return new FacebookCallback<LoginResult>() {
+    void addToContainer(ViewGroup container, FacebookLoginButtonProvider.SuccessCallback successCallback, FacebookLoginButtonProvider.ErrorCallback errorCallback);
 
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                successCallback.onSuccess();
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                errorCallback.onError();
-            }
-        };
-    }
-
-    void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
+    void onActivityResult(int requestCode, int resultCode, Intent data);
 }

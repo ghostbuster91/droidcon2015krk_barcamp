@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FacebookLoginButtonProvider provider = new FacebookLoginButtonProvider();
+    private FacebookLoginButtonProvider provider = new FacebookLoginButtonProviderImpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
