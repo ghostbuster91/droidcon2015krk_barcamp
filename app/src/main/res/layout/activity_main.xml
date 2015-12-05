@@ -15,12 +15,13 @@
         android:layout_height="wrap_content"
         android:text="Hello Everyone!" />
 
-    <FrameLayout
-        android:id="@+id/facebook_button_container"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
-        android:layout_height="70dp">
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:id="@+id/login_result_descritpion"

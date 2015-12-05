@@ -1,4 +1,4 @@
-package pl.ghostbuster.droidconbarcamp;
+package pl.ghostbuster.droidconbarcamp.utlis;
 
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.v7.widget.AppCompatTextView;
@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
 
 public class TextViewMatchers {
 
-    static Matcher<View> hasText(final String text) {
+    public static Matcher<View> hasText(final String text) {
         return new BoundedMatcher<View, AppCompatTextView>(AppCompatTextView.class) {
 
             @Override
