@@ -1,5 +1,6 @@
 package pl.ghostbuster.droidconbarcamp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,10 +8,15 @@ import android.view.ViewGroup;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 public class FacebookLoginButtonProvider {
+
+    public void initSdk(Context context) {
+        FacebookSdk.sdkInitialize(context);
+    }
 
     interface SuccessCallback {
         void onSuccess();

@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.facebook.FacebookSdk;
-
 public class MainActivity extends AppCompatActivity {
 
     private FacebookLoginButtonProvider provider = new FacebookLoginButtonProvider();
@@ -15,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        provider.initSdk(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         final TextView loginResultsView = (TextView) findViewById(R.id.login_result_descritpion);
