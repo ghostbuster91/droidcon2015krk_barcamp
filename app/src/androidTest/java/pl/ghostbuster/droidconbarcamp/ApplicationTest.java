@@ -1,15 +1,22 @@
 package pl.ghostbuster.droidconbarcamp;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 
-public class ApplicationTest extends ApplicationTestCase<Application> {
+public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivity> {
+
     public ApplicationTest() {
-        super(Application.class);
+        super(MainActivity.class);
     }
 
+    public void testShouldShowErrorMessageWhenLoggingByFacebookFail() {
+        getActivity();
+    }
 
-    public void testShouldFail() {
-        assertEquals(1, 2);
+    public void testShouldShowMessageCanceledWhenLoggingByFacebookCanceled() {
+        getActivity();
+    }
+
+    public void testShouldShowSuccessMessageWhenLoggingByFacebookSucceed() {
+        getActivity();
     }
 }
