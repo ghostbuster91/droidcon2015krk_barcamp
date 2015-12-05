@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -20,32 +19,12 @@ public class FacebookLoginButtonProviderImpl implements FacebookLoginButtonProvi
         FacebookSdk.sdkInitialize(context);
     }
 
-    public void addToContainer(ViewGroup container, FacebookLoginButtonProvider.SuccessCallback successCallback, FacebookLoginButtonProvider.ErrorCallback errorCallback) {
+    public void addToContainer(ViewGroup container, FacebookCallback<LoginResult> facebookCallback) {
         callbackManager = CallbackManager.Factory.create();
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         LoginButton button = (LoginButton) inflater.inflate(R.layout.facebook_login_button, container, false);
         container.addView(button);
-        button.registerCallback(callbackManager, createFacebookCallback(successCallback, errorCallback));
-    }
-
-    public FacebookCallback<LoginResult> createFacebookCallback(final FacebookLoginButtonProvider.SuccessCallback successCallback, final FacebookLoginButtonProvider.ErrorCallback errorCallback) {
-        return new FacebookCallback<LoginResult>() {
-
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                successCallback.onSuccess();
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                errorCallback.onError();
-            }
-        };
+        button.registerCallback(callbackManager, facebookCallback);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
